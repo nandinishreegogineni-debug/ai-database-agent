@@ -8,10 +8,9 @@ task = st.text_input("Enter your query")
 if st.button("Run"):
 
     response = requests.post(
-        "http://127.0.0.1:8000/task",
-        json={"task": task}
-    )
-
+    "https://ai-database-agent.onrender.com/task",
+    json={"task": task}
+)
     data = response.json()
 
     st.subheader("Generated SQL")
@@ -19,3 +18,4 @@ if st.button("Run"):
 
     st.subheader("Result")
     st.write(data["result"])
+
