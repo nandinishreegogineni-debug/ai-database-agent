@@ -31,3 +31,5 @@ uvicorn backend.main:app --reload
 
 Frontend:
 streamlit run frontend/app.py
+
+
