@@ -33,3 +33,4 @@ Frontend:
 streamlit run frontend/app.py
 
 
+App live domain link: https://ai-database-agent-iwrrghznhhumzmyfkz9zzu.streamlit.app/
