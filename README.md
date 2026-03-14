@@ -24,13 +24,5 @@ SELECT * FROM users WHERE age > 30;
 ## Deployment
 Backend deployed on Render.
 
-## How to Run Locally
-
-Backend:
-uvicorn backend.main:app --reload
-
-Frontend:
-streamlit run frontend/app.py
-
 
 App live domain link: https://ai-database-agent-iwrrghznhhumzmyfkz9zzu.streamlit.app/
