@@ -1,33 +1,22 @@
 from fastapi import FastAPI
 import sqlite3
-import requests
 
 app = FastAPI()
 
-
 def generate_sql(question):
+    question = question.lower()
 
-    prompt = f"""
-You are an AI that converts natural language to SQL.
-
-Database table:
-users(id, name, age)
-
-Question: {question}
-
-Return ONLY the SQL query.
-"""
-
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": "llama3",
-            "prompt": prompt,
-            "stream": False
-        }
-    )
-
-    return response.json()["response"].strip()
+    if "all users" in question:
+        return "SELECT * FROM users;"
+    
+    elif "age" in question:
+        return "SELECT name, age FROM users;"
+    
+    elif "older than 30" in question:
+        return "SELECT * FROM users WHERE age > 30;"
+    
+    else:
+        return "SELECT * FROM users;"
 
 
 @app.post("/task")
@@ -37,7 +26,7 @@ def run_task(data: dict):
 
     sql = generate_sql(task)
 
-    conn = sqlite3.connect("../database/company.db")
+    conn = sqlite3.connect("database/company.db")
     cursor = conn.cursor()
 
     cursor.execute(sql)
